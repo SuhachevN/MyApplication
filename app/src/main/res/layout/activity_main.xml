@@ -5,15 +5,46 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/main_background_color">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:gravity="bottom|center_horizontal"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/main_space_16"
+        android:layout_marginEnd="@dimen/main_space_16"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btnCategories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button_categories_text"
+            style="@style/StyleNavButton"
+            android:textAppearance="@style/StyleTitle14"
+            android:backgroundTint="@color/button_categories_color"/>
+
+        <Space
+            android:layout_width="4dp"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btnFavorites"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/main_space_half_8"
+            android:text="@string/button_favorites_text"
+            style="@style/StyleNavButton"
+            android:textAppearance="@style/StyleTitle14"
+            android:backgroundTint="@color/button_favorites_color"
+            app:icon="@drawable/ic_heart_empty"
+            app:iconGravity="textEnd" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
