@@ -10,7 +10,8 @@ import com.example.myapplication.databinding.FragmentListCategoriesBinding
 class CategoriesListFragment : Fragment() {
 
     private var _binding: FragmentListCategoriesBinding? = null
-    private val binding get() = _binding!! // где-то нашел инфу что это правильный стиль в fragment, хоть и не уверен в !!
+    private val binding: FragmentListCategoriesBinding
+        get() = _binding ?: throw IllegalStateException("Binding is null. View might be destroyed.")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -30,7 +30,7 @@
             android:backgroundTint="@color/button_categories_color"/>
 
         <Space
-            android:layout_width="4dp"
+            android:layout_width="@dimen/space_small"
             android:layout_height="wrap_content"/>
 
         <Button
