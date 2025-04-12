@@ -30,7 +30,7 @@
             android:backgroundTint="@color/button_categories_color"/>
 
         <Space
-            android:layout_width="@dimen/space_small"
+            android:layout_width="@dimen/space_small_4"
             android:layout_height="wrap_content"/>
 
         <Button
@@ -51,7 +51,7 @@
         android:id="@+id/mainContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/main_space_bottom_fragment"
+        android:layout_marginBottom="@dimen/main_space_bottom_fragment_9"
         app:layout_constraintBottom_toTopOf="@+id/buttonContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
