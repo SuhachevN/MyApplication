@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">My Application</string>
-    <string name="button_categories_text">Categories</string>
+    <string name="app_name">MyApplication</string>
     <string name="button_favorites_text">Favorites</string>
+    <string name="categories_fragment">Categories Fragment</string>
+    <string name="button_categories_text">Categories</string>
 </resources>
