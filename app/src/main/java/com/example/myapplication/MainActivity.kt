@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.commit {
                     setReorderingAllowed(true)
                     replace<FavoritesListFragment>(R.id.mainContainer)
+                    addToBackStack(null)
                 }
             }
         }
