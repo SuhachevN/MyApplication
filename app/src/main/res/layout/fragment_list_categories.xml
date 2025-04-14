@@ -1,18 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/categories_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_background_color"
     android:gravity="center"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_fragment_categories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_categories_text" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="224dp"
+        android:layout_marginTop="@dimen/main_space_32">
+
+        <ImageView
+            android:id="@+id/iv_fragment_categories_head"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/bcg_categories"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="164dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="195dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="@string/button_categories_text"
+            android:background="@drawable/shape_rounded_header_title"
+            style="@style/StyleHeaderTitleText"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCategories"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="@dimen/main_space_20"
+        android:layout_marginHorizontal="@dimen/main_space_half_8"
+        android:layout_marginTop="@dimen/main_space_16"
+        tools:listitem="@layout/item_category"
+        tools:itemCount="6"
+        tools:spanCount="2"
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
 
 </LinearLayout>
