@@ -1,36 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="8dp"
     card_view:cardCornerRadius="@dimen/main_space_half_8"
+    app:cardElevation="4dp"
     android:clickable="true"
-    android:foreground="@color/white">
+    android:foreground="?attr/selectableItemBackground">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/ivCategoryImage"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:scaleType="centerCrop"/>
+            android:layout_height="130dp"
+            android:contentDescription="@string/category_image_description"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/tvCategoryName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            tools:contentDescription="Изображение категории Бургеры"
+            android:src="@drawable/burger"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvCategoryName"
+            style="@style/StyleMainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="@dimen/main_space_half_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivCategoryImage"
+            card_view:layout_constraintBottom_toTopOf="@+id/tvCategoryDescription"
+            tools:text="Бургеры" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tvCategoryDescription"
+            style="@style/StyleCategoryTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/main_space_half_8"
+            android:layout_marginEnd="@dimen/main_space_half_8"
+            android:layout_marginBottom="@dimen/main_space_half_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCategoryName"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Рецепты всех популярных видов бургеров" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
+

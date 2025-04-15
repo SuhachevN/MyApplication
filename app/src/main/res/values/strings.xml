@@ -3,4 +3,5 @@
     <string name="button_favorites_text">Favorites</string>
     <string name="categories_fragment">Categories Fragment</string>
     <string name="button_categories_text">Categories</string>
+    <string name="category_image_description">Изображение категории %1$s</string>
 </resources>
