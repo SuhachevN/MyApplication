@@ -24,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/button_categories_text"
+            android:text="@string/btn_categories_text"
             style="@style/StyleNavButton"
             android:textAppearance="@style/StyleTitle14"
             android:backgroundTint="@color/button_categories_color"/>
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="@dimen/main_space_half_8"
-            android:text="@string/button_favorites_text"
+            android:text="@string/btn_favorites"
             style="@style/StyleNavButton"
             android:textAppearance="@style/StyleTitle14"
             android:backgroundTint="@color/button_favorites_color"

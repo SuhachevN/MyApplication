@@ -12,6 +12,6 @@
         android:id="@+id/tv_fragment_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_favorites_text" />
+        android:text="@string/btn_favorites" />
 
 </LinearLayout>

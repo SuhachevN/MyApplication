@@ -36,7 +36,7 @@
             android:layout_marginStart="@dimen/main_space_16"
             android:layout_marginBottom="@dimen/main_space_16"
             android:gravity="center"
-            android:text="@string/button_categories_text"
+            android:text="@string/btn_categories_text"
             app:layout_constraintBottom_toBottomOf="@+id/iv_fragment_categories_head"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -45,17 +45,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCategories"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/main_space_16"
         android:layout_marginHorizontal="@dimen/main_space_half_8"
         android:layout_marginBottom="@dimen/main_space_20"
         tools:listitem="@layout/item_category"
         tools:itemCount="6"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        app:layout_constraintTop_toBottomOf="@id/Header"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:spanCount="2" />
 
 </LinearLayout>
