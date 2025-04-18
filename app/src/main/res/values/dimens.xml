@@ -5,5 +5,7 @@
     <dimen name="main_space_half_8">8dp</dimen>
     <dimen name="main_space_bottom_fragment_9">9dp</dimen>
     <dimen name="space_small_4">4dp</dimen>
+    <dimen name="main_space_20">20dp</dimen>
+    <dimen name="main_space_32">32dp</dimen>
 
 </resources>
