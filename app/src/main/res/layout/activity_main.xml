@@ -41,6 +41,8 @@
             android:drawablePadding="@dimen/main_space_half_8"
             android:text="@string/btn_favorites"
             style="@style/StyleNavButton"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textAppearance="@style/StyleTitle14"
             android:backgroundTint="@color/button_favorites_color"
             app:icon="@drawable/ic_heart_empty"
