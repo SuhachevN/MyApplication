@@ -24,7 +24,10 @@ class CategoriesListAdapter(
                 val inputStream: InputStream = itemView.context.assets.open(category.imageUrl)
                 val drawable = Drawable.createFromStream(inputStream, null)
                 binding.ivCategoryImage.setImageDrawable(drawable)
-                binding.ivCategoryImage.contentDescription = category.title
+                binding.ivCategoryImage.contentDescription = itemView.context.getString(
+                    R.string.category_image_description,
+                    category.title
+                )
             } catch (e: IOException) {
                 Log.e("CategoriesListAdapter", "Ошибка при загрузке изображения из assets", e)
             }

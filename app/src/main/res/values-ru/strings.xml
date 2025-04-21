@@ -4,7 +4,6 @@
         <string name="app_name">MyApplication</string>
         <string name="btn_favorites">Избранное</string>
         <string name="btn_categories_text">Категории</string>
-        <string name="category_image_description">Изображение категории</string>
         <string name="category_header_description">Изображение шапки категорий</string>
         <string name="content_description">Описание рецепта</string>
         <string name="burgers">Бургеры</string>
