@@ -13,6 +13,13 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
     private val binding: FragmentListCategoriesBinding
         get() = _binding ?: throw IllegalStateException("Binding is null. View might be destroyed.")
 
+    private fun openRecipesByCategoryId() {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, RecipesListFragment())
+            .addToBackStack(null)
+            .commit()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,9 +40,14 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
     }
 
     private fun initRecycler() {
-        val categories: List<Category> = STUB.getCategories()
-        val adapter = CategoriesListAdapter(categories)
-        binding.recyclerViewCategories.adapter = adapter
+        val categoriesAdapter = CategoriesListAdapter(STUB.getCategories())
+        binding.rvCategories.adapter = categoriesAdapter
+
+        categoriesAdapter.setOnItemClickListener(object : CategoriesListAdapter.OnItemClickListener {
+            override fun onItemClick(category: Category) {
+                openRecipesByCategoryId()
+            }
+        })
     }
 
 }
