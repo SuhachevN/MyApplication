@@ -13,9 +13,29 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
     private val binding: FragmentListCategoriesBinding
         get() = _binding ?: throw IllegalStateException("Binding is null. View might be destroyed.")
 
-    private fun openRecipesByCategoryId() {
+    private lateinit var categoriesListAdapter: CategoriesListAdapter
+
+    fun onItemClick(categoryId: Int) {
+        openRecipesByCategoryId(categoryId)
+    }
+
+    private fun openRecipesByCategoryId(categoryId: Int) {
+        val category = STUB.getCategories().find { it.id == categoryId }
+        val categoryName = category?.title
+        val categoryImageUrl = category?.imageUrl
+
+        val bundle = Bundle().apply {
+            putInt(ARG_CATEGORY_ID, categoryId)
+            putString(ARG_CATEGORY_NAME, categoryName)
+            putString(ARG_CATEGORY_IMAGE_URL, categoryImageUrl)
+        }
+
+        val recipesListFragment = RecipesListFragment().apply {
+            arguments = bundle
+        }
+
         parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, RecipesListFragment())
+            .replace(R.id.fragmentContainer, recipesListFragment)
             .addToBackStack(null)
             .commit()
     }
@@ -26,7 +46,6 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
     ): View {
         _binding = FragmentListCategoriesBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,10 +63,10 @@ class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
         binding.rvCategories.adapter = categoriesAdapter
 
         categoriesAdapter.setOnItemClickListener(object : CategoriesListAdapter.OnItemClickListener {
-            override fun onItemClick(category: Category) {
-                openRecipesByCategoryId()
+            override fun onItemClick(categoryId: Int) {
+                openRecipesByCategoryId(categoryId)
             }
         })
     }
-
 }
+

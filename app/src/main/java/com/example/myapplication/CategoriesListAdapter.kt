@@ -14,7 +14,7 @@ class CategoriesListAdapter(
 ) : RecyclerView.Adapter<CategoriesListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
-        fun onItemClick(category: Category)
+        fun onItemClick(categoryId: Int)
     }
 
     private var itemClickListener: OnItemClickListener? = null
@@ -41,6 +41,10 @@ class CategoriesListAdapter(
             } catch (e: IOException) {
                 Log.e("CategoriesListAdapter", "Ошибка при загрузке изображения из assets", e)
             }
+
+            itemView.setOnClickListener {
+                itemClickListener?.onItemClick(category.id)
+            }
         }
     }
 
@@ -56,15 +60,7 @@ class CategoriesListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val category = dataSet[position]
         holder.bind(category)
-
-        holder.itemView.setOnClickListener {
-            itemClickListener?.onItemClick(category)
-        }
     }
 
     override fun getItemCount(): Int = dataSet.size
 }
-
-
-
-
