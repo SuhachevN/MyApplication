@@ -12,17 +12,28 @@ class RecipesListFragment : Fragment(R.layout.fragment_list_recipes) {
     private val binding: FragmentListRecipesBinding
         get() = _binding ?: throw IllegalStateException("Binding is null. View might be destroyed.")
 
+    companion object {
+        const val ARG_CATEGORY_ID = "categoryId"
+        const val ARG_CATEGORY_NAME = "categoryName"
+        const val ARG_CATEGORY_IMAGE_URL = "categoryImageUrl"
+    }
+
     private var categoryId: Int? = null
     private var categoryName: String? = null
     private var categoryImageUrl: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private fun initBundleData() {
+
         arguments?.let {
             categoryId = it.getInt(ARG_CATEGORY_ID)
             categoryName = it.getString(ARG_CATEGORY_NAME)
             categoryImageUrl = it.getString(ARG_CATEGORY_IMAGE_URL)
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initBundleData()
     }
 
     override fun onCreateView(
@@ -42,7 +53,3 @@ class RecipesListFragment : Fragment(R.layout.fragment_list_recipes) {
         _binding = null
     }
 }
-
-const val ARG_CATEGORY_ID = "categoryId"
-const val ARG_CATEGORY_NAME = "categoryName"
-const val ARG_CATEGORY_IMAGE_URL = "categoryImageUrl" // Может их в отдельный файл? Они по сути глобальные.
