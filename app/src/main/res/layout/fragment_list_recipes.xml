@@ -1,15 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/main_background_color"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvRecipes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="тут будут рецепты"
-        android:textSize="20sp"
-        android:layout_gravity="center" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/RecipesHeader"
+        android:layout_width="match_parent"
+        android:layout_height="224dp"
+        android:layout_marginTop="@dimen/main_space_32">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/ivRecipesHeader"
+            android:src="@drawable/burger"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="recipe_image_description"
+            tools:contentDescription="Изображение шапки категории(бургеры)"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvRecipesHeaderTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StyleHeaderTitleText"
+            android:layout_marginStart="@dimen/main_space_16"
+            android:layout_marginBottom="@dimen/main_space_16"
+            android:gravity="center"
+            android:text="@string/burgers"
+            app:layout_constraintBottom_toBottomOf="@+id/ivRecipesHeader"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRecipes"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:layout_marginTop="@dimen/main_space_16"
+        android:layout_marginHorizontal="@dimen/main_space_half_8"
+        android:layout_marginBottom="@dimen/main_space_bottom_fragment_9"
+        tools:itemCount="8"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="1"
+        tools:listitem="@layout/item_recipe">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+</LinearLayout>
