@@ -27,6 +27,31 @@ class RecipesListFragment : Fragment(R.layout.fragment_list_recipes) {
         const val ARG_CATEGORY_IMAGE_URL = "categoryImageUrl"
     }
 
+    private fun initUi() {
+        categoryId?.let { id ->
+            val recipes = STUB.getRecipesByCategoryId(id)
+            val recipesAdapter = RecipesListAdapter(recipes)
+            recipesAdapter.setOnItemClickListener { recipeId ->
+                openRecipeByRecipeId(recipeId)
+            }
+            binding.rvRecipes.adapter = recipesAdapter
+        }
+
+        categoryName?.let { name ->
+            binding.tvRecipesHeaderTitle.text = name
+        }
+
+        categoryImageUrl?.let { imageUrl ->
+            try {
+                val inputStream: InputStream = requireContext().assets.open(imageUrl)
+                val drawable = Drawable.createFromStream(inputStream, null)
+                binding.ivRecipesHeader.setImageDrawable(drawable)
+            } catch (e: IOException) {
+                Log.e("RecipesListFragment", "Ошибка при загрузке изображения", e)
+            }
+        }
+    }
+
     private fun openRecipeByRecipeId(recipeId: Int) {
         val recipeFragment = RecipeFragment.newInstance(recipeId)
         parentFragmentManager.beginTransaction()
@@ -58,29 +83,7 @@ class RecipesListFragment : Fragment(R.layout.fragment_list_recipes) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        categoryId?.let { id ->
-            val recipes = STUB.getRecipesByCategoryId(id)
-            val recipesAdapter = RecipesListAdapter(recipes)
-            recipesAdapter.setOnItemClickListener { recipeId ->
-                openRecipeByRecipeId(recipeId)
-            }
-            binding.rvRecipes.adapter = recipesAdapter
-        }
-
-        categoryName?.let { name ->
-            binding.tvRecipesHeaderTitle.text = name
-        }
-
-        categoryImageUrl?.let { imageUrl ->
-            try {
-                val inputStream: InputStream = requireContext().assets.open(imageUrl)
-                val drawable = Drawable.createFromStream(inputStream, null)
-                binding.ivRecipesHeader.setImageDrawable(drawable)
-            } catch (e: IOException) {
-                Log.e("RecipesListFragment", "Ошибка при загрузке изображения", e)
-            }
-        }
+        initUi()
     }
 
     override fun onDestroyView() {

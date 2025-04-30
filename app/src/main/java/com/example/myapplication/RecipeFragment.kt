@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.FragmentRecipeBinding
 
@@ -16,10 +15,31 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
 
     private var recipeId: Int? = null
 
+    companion object {
+        private const val ARG_RECIPE_ID = "recipeId"
+
+        fun newInstance(recipeId: Int): RecipeFragment {
+            return RecipeFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(ARG_RECIPE_ID, recipeId)
+                }
+            }
+        }
+    }
+
+    private fun initUi() {
+        recipeId?.let {
+            binding.tvRecipeId.text = "Recipe ID: $it"
+        } ?: run {
+            binding.tvRecipeId.text = "Recipe ID is not available"
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            recipeId = it.getInt("recipeId")
+            recipeId = it.getInt(ARG_RECIPE_ID)
         }
     }
 
@@ -34,23 +54,11 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recipeId?.let {
-            binding.tvRecipeId.text = "Recipe ID: $it"
-        }
+        initUi()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        fun newInstance(recipeId: Int): RecipeFragment {
-            val fragment = RecipeFragment()
-            val args = Bundle()
-            args.putInt("recipeId", recipeId)
-            fragment.arguments = args
-            return fragment
-        }
     }
 }

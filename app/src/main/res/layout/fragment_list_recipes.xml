@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
-            android:contentDescription="recipe_image_description"
+            android:contentDescription="@string/recipe_image_description"
             tools:contentDescription="Изображение шапки категории(бургеры)"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +51,7 @@
         android:layout_marginHorizontal="@dimen/main_space_half_8"
         android:layout_marginBottom="@dimen/main_space_bottom_fragment_9"
         tools:itemCount="8"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:spanCount="1"
         tools:listitem="@layout/item_recipe">
 
