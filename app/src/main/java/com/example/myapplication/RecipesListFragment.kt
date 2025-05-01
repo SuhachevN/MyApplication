@@ -25,6 +25,7 @@ class RecipesListFragment : Fragment(R.layout.fragment_list_recipes) {
         const val ARG_CATEGORY_ID = "categoryId"
         const val ARG_CATEGORY_NAME = "categoryName"
         const val ARG_CATEGORY_IMAGE_URL = "categoryImageUrl"
+        const val ARG_RECIPE = "recipe"
     }
 
     private fun initUi() {
@@ -53,12 +54,26 @@ class RecipesListFragment : Fragment(R.layout.fragment_list_recipes) {
     }
 
     private fun openRecipeByRecipeId(recipeId: Int) {
-        val recipeFragment = RecipeFragment.newInstance(recipeId)
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, recipeFragment)
-            .addToBackStack(null)
-            .commit()
+
+        val recipe = STUB.getRecipeById(recipeId)
+        recipe?.let {
+            val bundle = Bundle().apply {
+                putParcelable(ARG_RECIPE, it)
+            }
+
+            val recipeFragment = RecipeFragment().apply {
+                arguments = bundle
+            }
+
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, recipeFragment)
+                .addToBackStack(null)
+                .commit()
+        } ?: run {
+            Log.e("RecipesListFragment", "Рецепт с ID $recipeId не найден.")
+        }
     }
+
 
     private fun initBundleData() {
         arguments?.let {

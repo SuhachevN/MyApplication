@@ -271,4 +271,8 @@ object STUB {
             emptyList()
         }
     }
+
+    fun getRecipeById(recipe: Int): Recipe? {
+        return burgerRecipes.find { it.id == recipe }
+    }
 }
