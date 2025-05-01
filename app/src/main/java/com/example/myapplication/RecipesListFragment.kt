@@ -1,16 +1,25 @@
 package com.example.myapplication
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.FragmentListRecipesBinding
+import java.io.IOException
+import java.io.InputStream
 
 class RecipesListFragment : Fragment(R.layout.fragment_list_recipes) {
+
     private var _binding: FragmentListRecipesBinding? = null
     private val binding: FragmentListRecipesBinding
         get() = _binding ?: throw IllegalStateException("Binding is null. View might be destroyed.")
+
+    private var categoryId: Int? = null
+    private var categoryName: String? = null
+    private var categoryImageUrl: String? = null
 
     companion object {
         const val ARG_CATEGORY_ID = "categoryId"
@@ -18,12 +27,40 @@ class RecipesListFragment : Fragment(R.layout.fragment_list_recipes) {
         const val ARG_CATEGORY_IMAGE_URL = "categoryImageUrl"
     }
 
-    private var categoryId: Int? = null
-    private var categoryName: String? = null
-    private var categoryImageUrl: String? = null
+    private fun initUi() {
+        categoryId?.let { id ->
+            val recipes = STUB.getRecipesByCategoryId(id)
+            val recipesAdapter = RecipesListAdapter(recipes)
+            recipesAdapter.setOnItemClickListener { recipeId ->
+                openRecipeByRecipeId(recipeId)
+            }
+            binding.rvRecipes.adapter = recipesAdapter
+        }
+
+        categoryName?.let { name ->
+            binding.tvRecipesHeaderTitle.text = name
+        }
+
+        categoryImageUrl?.let { imageUrl ->
+            try {
+                val inputStream: InputStream = requireContext().assets.open(imageUrl)
+                val drawable = Drawable.createFromStream(inputStream, null)
+                binding.ivRecipesHeader.setImageDrawable(drawable)
+            } catch (e: IOException) {
+                Log.e("RecipesListFragment", "Ошибка при загрузке изображения", e)
+            }
+        }
+    }
+
+    private fun openRecipeByRecipeId(recipeId: Int) {
+        val recipeFragment = RecipeFragment.newInstance(recipeId)
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, recipeFragment)
+            .addToBackStack(null)
+            .commit()
+    }
 
     private fun initBundleData() {
-
         arguments?.let {
             categoryId = it.getInt(ARG_CATEGORY_ID)
             categoryName = it.getString(ARG_CATEGORY_NAME)
@@ -46,6 +83,7 @@ class RecipesListFragment : Fragment(R.layout.fragment_list_recipes) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initUi()
     }
 
     override fun onDestroyView() {
