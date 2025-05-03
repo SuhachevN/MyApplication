@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.FragmentListRecipesBinding
 import java.io.IOException
@@ -22,9 +23,10 @@ class RecipesListFragment : Fragment(R.layout.fragment_list_recipes) {
     private var categoryImageUrl: String? = null
 
     companion object {
-        const val ARG_CATEGORY_ID = "categoryId"
-        const val ARG_CATEGORY_NAME = "categoryName"
-        const val ARG_CATEGORY_IMAGE_URL = "categoryImageUrl"
+        const val ARG_CATEGORY_ID = "arg_category_id"
+        const val ARG_CATEGORY_NAME = "arg_category_name"
+        const val ARG_CATEGORY_IMAGE_URL = "arg_category_image_url"
+        const val ARG_RECIPE = "arg_recipe"
     }
 
     private fun initUi() {
@@ -53,12 +55,24 @@ class RecipesListFragment : Fragment(R.layout.fragment_list_recipes) {
     }
 
     private fun openRecipeByRecipeId(recipeId: Int) {
-        val recipeFragment = RecipeFragment.newInstance(recipeId)
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, recipeFragment)
-            .addToBackStack(null)
-            .commit()
+
+        val recipe = STUB.getRecipeById(recipeId)
+        recipe?.let {
+            val bundle = bundleOf(ARG_RECIPE to recipe)
+
+            val recipeFragment = RecipeFragment().apply {
+                arguments = bundle
+            }
+
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, recipeFragment)
+                .addToBackStack(null)
+                .commit()
+        } ?: run {
+            Log.e("RecipesListFragment", "Рецепт с ID $recipeId не найден.")
+        }
     }
+
 
     private fun initBundleData() {
         arguments?.let {

@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,25 +14,25 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     private val binding: FragmentRecipeBinding
         get() = _binding ?: throw IllegalStateException("Binding is null. View might be destroyed.")
 
-    private var recipeId: Int? = null
+    private var recipe: Recipe? = null
 
     companion object {
-        private const val ARG_RECIPE_ID = "recipeId"
+        private const val ARG_RECIPE = "arg_recipe"
 
-        fun newInstance(recipeId: Int): RecipeFragment {
+        fun newInstance(recipe: Recipe): RecipeFragment {
             return RecipeFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(ARG_RECIPE_ID, recipeId)
+                    putParcelable(ARG_RECIPE, recipe)
                 }
             }
         }
     }
 
     private fun initUi() {
-        recipeId?.let {
-            binding.tvRecipeId.text = "Recipe ID: $it"
+        recipe?.let {
+            binding.tvRecipe.text = it.title
         } ?: run {
-            binding.tvRecipeId.text = "Recipe ID is not available"
+            binding.tvRecipe.text = "Recipe not found"
         }
     }
 
@@ -39,7 +40,12 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            recipeId = it.getInt(ARG_RECIPE_ID)
+            recipe = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                it.getParcelable(ARG_RECIPE, Recipe::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                it.getParcelable(ARG_RECIPE)
+            }
         }
     }
 
