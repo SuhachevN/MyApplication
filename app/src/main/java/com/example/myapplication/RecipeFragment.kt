@@ -17,7 +17,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     private var recipe: Recipe? = null
 
     companion object {
-        private const val ARG_RECIPE = "recipe"
+        private const val ARG_RECIPE = "arg_recipe"
 
         fun newInstance(recipe: Recipe): RecipeFragment {
             return RecipeFragment().apply {
