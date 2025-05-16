@@ -7,4 +7,5 @@
     <string name="content_description">content_description</string>
     <string name="burgers">Burgers</string>
     <string name="recipe_image_description" translatable="false">Изображение рецепта %1$s</string>
+    <string name="burger_card_name" translatable="false">Бургер с грибами и сыром</string>
 </resources>
