@@ -1,15 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tvRecipe"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Recipe Fragment"
-        android:textSize="24sp"/>
+        android:orientation="vertical">
 
-</LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/RecipeCardHeader"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_size_224"
+        android:layout_marginTop="@dimen/main_space_32">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_heart"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/main_space_16"
+            android:layout_marginEnd="@dimen/main_space_16"/>
+
+        <ImageView
+            android:id="@+id/ivRecipeCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/burger"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/recipe_image_description"
+            tools:contentDescription="Изображение шапки карточки рецепта"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvRecipeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/StyleHeaderTitleText"
+            android:maxEms="10"
+            app:layout_constraintBottom_toBottomOf="@+id/ivRecipeCard"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/main_space_16"
+            android:layout_marginBottom="@dimen/main_space_16"
+            android:gravity="start"
+            android:text="@string/burger_card_name"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/main_space_half_8">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ингредиенты"
+            android:paddingTop="@dimen/main_space_half_8"
+            android:paddingStart="@dimen/main_space_half_8"
+            android:paddingBottom="6sp"
+            style="@style/StyleHeaderTitleText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Порции: 3"
+            android:textSize="16sp"
+            android:textColor="@color/color_gray"
+            android:paddingStart="@dimen/main_space_half_8"/>
+
+    </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_space_16"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:spanCount="1"
+            tools:itemCount="8" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Способ Приготовления"
+            style="@style/StyleHeaderTitleText"
+            android:layout_marginStart="@dimen/main_space_half_8"
+            android:paddingStart="@dimen/main_space_half_8"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMethod"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:layout_marginStart="@dimen/main_space_16"
+            android:layout_marginEnd="@dimen/main_space_16"
+            android:layout_marginBottom="@dimen/main_space_half_8"
+            tools:itemCount="8"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:spanCount="1"/>
+
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>

@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/RecipesHeader"
         android:layout_width="match_parent"
-        android:layout_height="224dp"
+        android:layout_height="@dimen/main_size_224"
         android:layout_marginTop="@dimen/main_space_32">
 
         <ImageView

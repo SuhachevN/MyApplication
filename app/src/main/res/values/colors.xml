@@ -9,5 +9,6 @@
     <color name="button_favorites_color">#E13E3E</color>
     <color name="main_background_color">#F4FAFF</color>
     <color name="category_title_text_color">#000000</color>
+    <color name="color_gray">#666666</color>
 
 </resources>

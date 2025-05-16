@@ -1,12 +1,18 @@
 package com.example.myapplication
 
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.FragmentRecipeBinding
+import com.google.android.material.divider.MaterialDividerItemDecoration
+import java.io.IOException
 
 class RecipeFragment : Fragment(R.layout.fragment_recipe) {
 
@@ -29,13 +35,38 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     }
 
     private fun initUi() {
-        recipe?.let {
-            binding.tvRecipe.text = it.title
-        } ?: run {
-            binding.tvRecipe.text = "Recipe not found"
+        binding.tvRecipeTitle.text = recipe?.title
+        recipe?.let { binding.ivRecipeCard.loadImageFromAssets(it.imageUrl) }
+    }
+
+    fun ImageView.loadImageFromAssets(assetPath: String) {
+        try {
+            context.assets.open(assetPath).use { inputStream ->
+                val drawable: Drawable? = Drawable.createFromStream(inputStream, null)
+                this.setImageDrawable(drawable)
+            }
+        } catch (e: IOException) {
+            Log.e("RecipeFragment", "Error loading image from assets: $assetPath", e)
         }
     }
 
+    private fun initRecycler() {
+        binding.rvIngredients.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = recipe?.let { IngredientsAdapter(it.ingredients) }
+            addItemDecoration(
+                MaterialDividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
+            )
+        }
+
+        binding.rvMethod.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = recipe?.let { MethodAdapter(it.method) }
+            addItemDecoration(
+                MaterialDividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
+            )
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +92,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUi()
+        initRecycler()
     }
 
     override fun onDestroyView() {
